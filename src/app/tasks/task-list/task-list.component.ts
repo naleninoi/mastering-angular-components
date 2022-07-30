@@ -25,4 +25,9 @@ export class TaskListComponent implements OnInit {
     this.tasks = this.taskService.getTasks();
   }
 
+  updateTask(task: Task) {
+    this.taskService.updateTask(task);
+    this.tasks = this.taskService.getTasks();
+  }
+
 }
