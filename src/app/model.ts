@@ -3,3 +3,9 @@ export interface Task {
     title: string,
     done: boolean
 }
+
+export enum TaskListFilterType {
+    ALL = 'ALL',
+    OPEN = 'OPEN',
+    DONE = 'DONE'
+}
