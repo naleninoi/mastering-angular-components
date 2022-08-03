@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class TaskService {
 
-  private tasks: Task[] = [
-    {id: 1, title: 'Task 1', done: false},
-    {id: 2, title: 'Task 2', done: true},
-    {id: 3, title: 'Task 3', done: false},
-    {id: 4, title: 'Task 4', done: false}
-  ];
+  private tasks: Task[] = [];
+
+  constructor(
+    private http: HttpClient
+  ) {
+    this.loadTasks();
+  }
 
   getTasks(): Task[] {
     return this.tasks.slice();
@@ -26,5 +28,9 @@ export class TaskService {
     const index = this.tasks.findIndex(t => t.id === task.id);
     this.tasks[index] = task;
   }
-  
+
+  private loadTasks() {
+    this.http.get<Task[]>('/api/tasks').subscribe(tasks => this.tasks = tasks);
+  }
+
 }

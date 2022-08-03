@@ -8,6 +8,9 @@ import { EnterTaskComponent } from './tasks/enter-task/enter-task.component';
 import { CheckboxComponent } from './ui/checkbox/checkbox.component';
 import { TaskService } from './tasks/task.service';
 import { ToggleComponent } from './ui/toggle/toggle.component';
+import {HttpClientModule} from "@angular/common/http";
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
+import {Database} from "./database";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { ToggleComponent } from './ui/toggle/toggle.component';
     ToggleComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(Database, {dataEncapsulation: false, delay: 0})
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]
