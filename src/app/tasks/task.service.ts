@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model';
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable()
 export class TaskService {
 
-  private tasks: Task[] = [];
+  private tasks = new BehaviorSubject<Task[]>([]);
 
   constructor(
     private http: HttpClient
@@ -13,24 +14,24 @@ export class TaskService {
     this.loadTasks();
   }
 
-  getTasks(): Task[] {
-    return this.tasks.slice();
+  getTasks() {
+    return this.tasks.asObservable();
   }
 
   addTask(task: Task) {
-    this.tasks.push({
-      ...task,
-      id: this.tasks.length + 1
-    });
+    return this.http
+      .post<Task>('/api/tasks', task)
+      .subscribe(() => this.loadTasks());
   }
 
   updateTask(task: Task) {
-    const index = this.tasks.findIndex(t => t.id === task.id);
-    this.tasks[index] = task;
+    return this.http
+      .post<Task>(`/api/tasks/${task.id}`, task)
+      .subscribe(() => this.loadTasks());
   }
 
   private loadTasks() {
-    this.http.get<Task[]>('/api/tasks').subscribe(tasks => this.tasks = tasks);
+    this.http.get<Task[]>('/api/tasks').subscribe(tasks => this.tasks.next(tasks));
   }
 
 }

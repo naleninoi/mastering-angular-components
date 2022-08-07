@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Task, TaskListFilterType } from 'src/app/model';
-import { TaskService } from '../task.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Task, TaskListFilterType} from 'src/app/model';
+import {TaskService} from '../task.service';
+import {BehaviorSubject, combineLatest, Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'mac-task-list',
@@ -9,10 +11,10 @@ import { TaskService } from '../task.service';
 })
 export class TaskListComponent implements OnInit {
 
-  tasks: Task[];
-  filteredTasks: Task[];
+  tasks: Observable<Task[]>;
+  filteredTasks: Observable<Task[]>;
   taskFilterTypes: TaskListFilterType[] = [TaskListFilterType.ALL, TaskListFilterType.OPEN, TaskListFilterType.DONE];
-  activeTaskFilterType: TaskListFilterType = TaskListFilterType.ALL;
+  activeTaskFilterType = new BehaviorSubject<TaskListFilterType>(TaskListFilterType.ALL);
 
   constructor(
     private taskService: TaskService
@@ -26,32 +28,31 @@ export class TaskListComponent implements OnInit {
   addTask(title: string) {
     const task: Task = {title, done: false};
     this.taskService.addTask(task);
-    this.tasks = this.taskService.getTasks();
-    this.filterTasks();
   }
 
   updateTask(task: Task) {
     this.taskService.updateTask(task);
-    this.tasks = this.taskService.getTasks();
-    this.filterTasks();
   }
 
   activateFilterType(type: string) {
-    this.activeTaskFilterType = TaskListFilterType[type];
-    this.filterTasks();
+    const filterType = TaskListFilterType[type];
+    this.activeTaskFilterType.next(filterType);
   }
 
   filterTasks() {
-    this.filteredTasks = this.tasks
-      .filter(task => {
-        if (this.activeTaskFilterType === TaskListFilterType.ALL) {
-          return true;
-        } else if (this.activeTaskFilterType === TaskListFilterType.OPEN) {
-          return !task.done;
-        } else {
-          return task.done;
-        }
-      });
+    this.filteredTasks = combineLatest([this.tasks, this.activeTaskFilterType])
+      .pipe(
+        map(([tasks, activeTaskFilterType]) => {
+          return tasks.filter(task => {
+            if (activeTaskFilterType === TaskListFilterType.ALL) {
+              return true;
+            } else if (activeTaskFilterType === TaskListFilterType.OPEN) {
+              return !task.done;
+            } else {
+              return task.done;
+            }
+          })
+        }));
   }
 
 }
