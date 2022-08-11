@@ -12,6 +12,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {Database} from "./database";
 import { TaskListContainerComponent } from './containers/task-list-container/task-list-container.component';
+import { ProjectService } from './projects/project.service';
+import { ProjectsComponent } from './projects/projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +23,15 @@ import { TaskListContainerComponent } from './containers/task-list-container/tas
     EnterTaskComponent,
     CheckboxComponent,
     ToggleComponent,
-    TaskListContainerComponent
+    TaskListContainerComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(Database, {dataEncapsulation: false, delay: 0})
   ],
-  providers: [TaskService],
+  providers: [ProjectService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

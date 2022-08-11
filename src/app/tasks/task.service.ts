@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Task } from '../model';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TaskService {
@@ -16,6 +17,13 @@ export class TaskService {
 
   getTasks() {
     return this.tasks.asObservable();
+  }
+
+  getProjectTasks(projectId: number) {
+    return this.tasks.asObservable()
+    .pipe(
+      map(tasks => tasks.filter(t => t.projectId === projectId))
+    );
   }
 
   addTask(task: Task) {
