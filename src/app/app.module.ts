@@ -15,6 +15,7 @@ import { TaskListContainerComponent } from './containers/task-list-container/tas
 import { ProjectService } from './projects/project.service';
 import { ProjectsComponent } from './projects/projects/projects.component';
 import { ProjectsContainerComponent } from './containers/projects-container/projects-container.component';
+import { TabsComponent } from './ui/tabs/tabs/tabs.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProjectsContainerComponent } from './containers/projects-container/proj
     ToggleComponent,
     TaskListContainerComponent,
     ProjectsComponent,
-    ProjectsContainerComponent
+    ProjectsContainerComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,16 +7,15 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import {Project, Tab} from 'src/app/model';
+import {Tab} from "../../../model";
 
 @Component({
-  selector: 'mac-projects',
-  templateUrl: './projects.component.html',
+  selector: 'mac-tabs',
+  templateUrl: './tabs.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectsComponent implements OnInit {
-  @Input() project: Project;
+export class TabsComponent implements OnInit {
   @Input() tabs: Tab[];
   @Input() activeTab: Tab;
   @Output() outActivateTab = new EventEmitter<Tab>();

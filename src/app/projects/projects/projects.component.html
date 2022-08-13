@@ -2,4 +2,9 @@
     <h2 class="title">{{project.title}}</h2>
     {{project.description}}
 </header>
-<mac-task-list-container></mac-task-list-container>
+<mac-tabs [tabs]="tabs"
+          [activeTab]="activeTab"
+          (outActivateTab)="activateTab($event)">
+</mac-tabs>
+<mac-task-list-container *ngIf="activeTab.id === 'tasks'">
+</mac-task-list-container>

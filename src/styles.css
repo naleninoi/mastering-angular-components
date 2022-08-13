@@ -110,6 +110,76 @@ p {
 
 mac-root {
   display: flex;
+  height: 100%
+}
+
+
+mac-root .side-nav {
+  height: 100%;
+  flex-basis: 300px;
+  flex-shrink: 0;
+  background-color: #302f2b
+}
+
+
+mac-root .main {
+  flex: auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+
+mac-user-area {
+  display: flex;
+  align-items: center;
+  background-color: #3699cb;
+  padding: 50px 30px;
+  color: #fff
+}
+
+
+mac-user-area .profile {
+  display: block;
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0
+}
+
+
+mac-user-area .information {
+  margin-left: 30px
+}
+
+
+mac-user-area .welcome-text {
+  font-size: 20px;
+  font-weight: 500
+}
+
+
+mac-project {
+  display: block
+}
+
+
+mac-project .header {
+  padding: 50px;
+  background-color: #fff;
+}
+
+
+mac-project .title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 400
+}
+
+
+mac-task-list-container {
+  display: block;
+  width: 100%;
 }
 
 
@@ -118,6 +188,7 @@ mac-task-list {
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
+  padding: 50px;
 }
 
 
@@ -172,7 +243,9 @@ mac-enter-task .title-input {
   border: none;
   border-bottom: 3px solid rgba(0, 0, 0, .12);
   background-color: transparent;
-  color: rgba(64, 64, 64, .56)
+  color: rgba(64, 64, 64, .56);
+  font-size: 18px;
+  font-weight: 500;
 }
 
 
@@ -354,4 +427,368 @@ mac-toggle .toggle-button:hover {
 mac-toggle .toggle-button.active {
   background-color: #f3cd2c !important;
   color: #fff !important
+}
+
+
+mac-tabs {
+  display: block;
+}
+
+
+mac-tabs .tab-list {
+  display: flex;
+  flex-shrink: 0;
+  list-style: none;
+  padding: 10px 50px;
+  margin: 0;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
+}
+
+
+mac-tabs .tab-list-item {
+  display: block;
+}
+
+
+mac-tabs .tab-button {
+  display: block;
+  margin-right: 33px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: rgba(0, 0, 0, .54);
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+
+mac-tabs .tab-button:hover {
+  color: #000;
+}
+
+
+mac-tabs .tab-button-active {
+  border-bottom: 3px solid #f3cd2c;
+  color: #000;
+}
+
+
+mac-navigation {
+  display: block;
+}
+
+
+mac-navigation-section {
+  display: block;
+  padding: 35px 30px 30px;
+  border-top: 3px solid rgba(0, 0, 0, .1)
+}
+
+
+mac-navigation-section .title {
+  color: hsla(0, 0%, 100%, .23);
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+
+mac-navigation-section .item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none
+}
+
+
+mac-navigation-item {
+  display: block;
+  margin-right: -30px;
+  margin-left: -30px;
+  padding: 16px 30px;
+  transition: all .3s ease;
+  line-height: 1.1;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: hsla(0, 0%, 100%, .5);
+  cursor: pointer;
+}
+
+
+mac-navigation-item:hover {
+  color: hsla(0, 0%, 100%, .9)
+}
+
+
+mac-navigation-item.active {
+  border-left: 3px solid #f3cd2c;
+  background-color: rgba(0, 0, 0, .5);
+  color: hsla(0, 0%, 100%, .9)
+}
+
+
+mac-editor {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  min-height: 50px
+}
+
+
+mac-editor .editable-content {
+  display: none;
+  min-height: 1em;
+  word-break: break-word;
+}
+
+
+mac-editor .editable-content:empty {
+  width: 100%;
+  min-width: 50px;
+}
+
+
+mac-editor .editable-content:focus {
+  outline: none;
+}
+
+
+mac-editor output {
+  word-break: break-word;
+}
+
+
+mac-editor .controls {
+  display: flex;
+  margin: 0 10px
+}
+
+
+mac-editor .icon-edit {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #3699cb
+}
+
+
+mac-editor .icon-edit:before {
+  content: "✎";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+
+mac-editor .icon-save {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #68be60;
+}
+
+
+mac-editor .icon-save:before {
+  content: "✓";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 35px;
+  height: 35px;
+  font-size: 35px;
+  line-height: 1;
+}
+
+
+mac-editor .icon-cancel {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #ff5967;
+}
+
+
+mac-editor .icon-cancel:before {
+  content: "🚫";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+
+mac-editor:hover .icon-edit {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+
+
+mac-editor.edit-mode .editable-content {
+  display: block;
+}
+
+
+mac-editor.edit-mode .output {
+  display: none;
+}
+
+
+mac-editor.edit-mode .icon-cancel, mac-editor.edit-mode .icon-save {
+  opacity: 1;
+  transform: scale(1)
+}
+
+
+mac-comments {
+  display: block;
+  padding: 50px;
+}
+
+
+mac-comments .title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 500
+}
+
+
+mac-comments .add-comment-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end
+}
+
+
+mac-comments .add-comment-box {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  min-height: 90px;
+  align-items: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
+  background-color: #fff
+}
+
+
+mac-comments .comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0
+}
+
+
+mac-comment {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+
+mac-comment .meta {
+  display: flex;
+  flex: 0 0 100px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+
+mac-comment .user-name {
+  font-weight: 400;
+}
+
+
+mac-comment .time {
+  font-size: 14px;
+}
+
+
+mac-comment .user-picture {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+}
+
+
+mac-comment .main {
+  display: flex;
+  flex: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: 30px;
+}
+
+
+mac-comment .content {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  min-height: 90px;
+  align-items: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
+  background-color: #fff;
+}
+
+
+mac-comment .content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: -50px;
+  width: 0;
+  height: 0;
+  border: 25px solid transparent;
+  border-right: 25px solid #fff;
 }

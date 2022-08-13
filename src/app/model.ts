@@ -12,6 +12,11 @@ export interface Project {
 
 }
 
+export interface Tab {
+  readonly id?: any;
+  readonly title: string;
+}
+
 export enum TaskListFilterType {
     ALL = 'ALL',
     OPEN = 'OPEN',

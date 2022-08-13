@@ -1,1 +1,5 @@
-<mac-projects [project]="selectedProject | async"></mac-projects>
+<mac-projects [project]="selectedProject | async"
+              [tabs]="tabs"
+              [activeTab]="activeTab"
+              (outActivateTab)="activateTab($event)">
+</mac-projects>
