@@ -10,12 +10,12 @@ import {
 import {Project, Tab} from 'src/app/model';
 
 @Component({
-  selector: 'mac-projects',
-  templateUrl: './projects.component.html',
+  selector: 'mac-project',
+  templateUrl: './project.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectComponent implements OnInit {
   @Input() project: Project;
   @Input() tabs: Tab[];
   @Input() activeTab: Tab;

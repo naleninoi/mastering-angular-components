@@ -13,9 +13,12 @@ import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {Database} from "./database";
 import { TaskListContainerComponent } from './containers/task-list-container/task-list-container.component';
 import { ProjectService } from './projects/project.service';
-import { ProjectsComponent } from './projects/projects/projects.component';
-import { ProjectsContainerComponent } from './containers/projects-container/projects-container.component';
+import { ProjectComponent } from './projects/projects/project.component';
+import { ProjectContainerComponent } from './containers/projects-container/project-container.component';
 import { TabsComponent } from './ui/tabs/tabs/tabs.component';
+import { NavigationItemComponent } from './ui/navigation/navigation-item/navigation-item.component';
+import { NavigationSectionComponent } from './ui/navigation/navigation-section/navigation-section.component';
+import { NavigationComponent } from './ui/navigation/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,12 @@ import { TabsComponent } from './ui/tabs/tabs/tabs.component';
     CheckboxComponent,
     ToggleComponent,
     TaskListContainerComponent,
-    ProjectsComponent,
-    ProjectsContainerComponent,
-    TabsComponent
+    ProjectComponent,
+    ProjectContainerComponent,
+    TabsComponent,
+    NavigationItemComponent,
+    NavigationSectionComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

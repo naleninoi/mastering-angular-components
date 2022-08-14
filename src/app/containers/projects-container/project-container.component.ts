@@ -4,12 +4,12 @@ import {Project, Tab} from "../../model";
 import {ProjectService} from "../../projects/project.service";
 
 @Component({
-  selector: 'mac-projects-container',
-  templateUrl: './projects-container.component.html',
+  selector: 'mac-project-container',
+  templateUrl: './project-container.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectsContainerComponent implements OnInit {
+export class ProjectContainerComponent implements OnInit {
 
   selectedProject: Observable<Project>;
 
