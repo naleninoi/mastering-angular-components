@@ -35,4 +35,8 @@ export class ProjectService {
   getSelectedProject() {
     return this.selectedProject;
   }
+
+  getProjects() {
+    return this.projects.asObservable();
+  }
 }

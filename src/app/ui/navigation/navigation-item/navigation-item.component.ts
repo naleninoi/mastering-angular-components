@@ -17,8 +17,8 @@ import {
 export class NavigationItemComponent implements OnInit {
 
   @Input() title: string;
-  @Input() navId: string;
-  @Output() outActivateNavigationItem = new EventEmitter<string>();
+  @Input() navId: number;
+  @Output() outActivateNavigationItem = new EventEmitter<number>();
 
   constructor() { }
 
