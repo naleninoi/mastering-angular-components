@@ -32,4 +32,8 @@ export class ProjectContainerComponent implements OnInit {
     this.activeTab = tab;
   }
 
+  updateProject(project: Project) {
+    this.projectService.updateProject(project);
+  }
+
 }

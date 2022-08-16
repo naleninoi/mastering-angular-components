@@ -1,6 +1,12 @@
 <header class="header">
-    <h2 class="title">{{project.title}}</h2>
-    {{project.description}}
+    <h2 class="title">
+      <mac-editor [content]="project.title"
+                  [showControls]="true"
+                  (outSaveEdit)="updateTitle($event)"></mac-editor>
+    </h2>
+    <mac-editor [content]="project.description"
+              [showControls]="true"
+              (outSaveEdit)="updateDescription($event)"></mac-editor>
 </header>
 <mac-tabs [tabs]="tabs"
           [activeTab]="activeTab"

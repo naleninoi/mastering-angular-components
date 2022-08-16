@@ -34,7 +34,7 @@ export class TaskService {
 
   updateTask(task: Task) {
     return this.http
-      .post<Task>(`/api/tasks/${task.id}`, task)
+      .post<Task[]>(`/api/tasks/${task.id}`, task)
       .subscribe(() => this.loadTasks());
   }
 

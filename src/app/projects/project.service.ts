@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Project } from '../model';
+import {Project} from '../model';
 
 @Injectable()
 export class ProjectService {
@@ -38,5 +38,11 @@ export class ProjectService {
 
   getProjects() {
     return this.projects.asObservable();
+  }
+
+  updateProject(project: Project) {
+    return this.http
+      .post<Project[]>(`/api/projects/${project.id}`, project)
+      .subscribe(() => this.loadProjects());
   }
 }

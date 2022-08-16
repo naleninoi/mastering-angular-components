@@ -21,9 +21,17 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  updateTitle(title: string) {
+    this.outUpdateTask.emit({
+      ...this.task,
+      title
+    });
+  }
+
   updateTask(done: boolean) {
     this.outUpdateTask.emit({
-      ...this.task, done
+      ...this.task,
+      done
     });
   }
 
