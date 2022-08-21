@@ -20,6 +20,8 @@ import { NavigationItemComponent } from './ui/navigation/navigation-item/navigat
 import { NavigationSectionComponent } from './ui/navigation/navigation-section/navigation-section.component';
 import { NavigationComponent } from './ui/navigation/navigation/navigation.component';
 import { EditorComponent } from './ui/editor/editor.component';
+import {UserService} from "./users/user.service";
+import { ProfilePictureComponent } from './users/profile-picture/profile-picture.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +38,15 @@ import { EditorComponent } from './ui/editor/editor.component';
     NavigationItemComponent,
     NavigationSectionComponent,
     NavigationComponent,
-    EditorComponent
+    EditorComponent,
+    ProfilePictureComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(Database, {dataEncapsulation: false, delay: 0})
   ],
-  providers: [ProjectService, TaskService],
+  providers: [ProjectService, TaskService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

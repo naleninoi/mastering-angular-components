@@ -1,5 +1,5 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
-import {Project, Task} from "./model";
+import {Project, Task, User} from "./model";
 import {Injectable} from "@angular/core";
 
 @Injectable({
@@ -18,5 +18,10 @@ export class Database implements InMemoryDbService {
       {id: 3, projectId: 1, title: 'Task 3', done: false},
       {id: 4, projectId: 1, title: 'Task 4', done: false}
     ];
-    return {projects, tasks}}
+
+    const users: User[] = [
+      {id: 1, name: 'Evok', pictureUrl: '/assets/user.png'}
+    ];
+
+    return {projects, tasks, users}}
 }
