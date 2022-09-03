@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Input} from '@angular/core';
-import {User} from "../../model";
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { User } from "../../model";
 
 @Component({
   selector: 'mac-user-area',

@@ -8,8 +8,8 @@ import {Injectable} from "@angular/core";
 export class Database implements InMemoryDbService {
   createDb(): {} {
     const projects: Project[] = [
-      {id: 1, title: 'My first project', description: 'This is your first project.'},
-      {id: 2, title: 'My second project', description: 'This is your second project.'},
+      {id: 1, title: 'My first project', description: 'This is your first project.', comments: []},
+      {id: 2, title: 'My second project', description: 'This is your second project.', comments: []},
     ];
 
     const tasks: Task[] = [

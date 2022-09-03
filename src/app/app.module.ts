@@ -13,7 +13,7 @@ import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {Database} from "./database";
 import { TaskListContainerComponent } from './containers/task-list-container/task-list-container.component';
 import { ProjectService } from './projects/project.service';
-import { ProjectComponent } from './projects/projects/project.component';
+import { ProjectComponent } from './projects/project/project.component';
 import { ProjectContainerComponent } from './containers/projects-container/project-container.component';
 import { TabsComponent } from './ui/tabs/tabs/tabs.component';
 import { NavigationItemComponent } from './ui/navigation/navigation-item/navigation-item.component';
@@ -23,6 +23,9 @@ import { EditorComponent } from './ui/editor/editor.component';
 import {UserService} from "./users/user.service";
 import { ProfilePictureComponent } from './users/profile-picture/profile-picture.component';
 import { UserAreaComponent } from './users/user-area/user-area.component';
+import { FromNowPipe } from './pipes/from-now.pipe';
+import { CommentComponent } from './comments/comment/comment.component';
+import { CommentsListComponent } from './comments/comments-list/comments-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { UserAreaComponent } from './users/user-area/user-area.component';
     NavigationComponent,
     EditorComponent,
     ProfilePictureComponent,
-    UserAreaComponent
+    UserAreaComponent,
+    FromNowPipe,
+    CommentComponent,
+    CommentsListComponent
   ],
   imports: [
     BrowserModule,

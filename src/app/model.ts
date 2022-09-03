@@ -1,19 +1,31 @@
-export interface Task {
-    readonly id?: number;
-    readonly projectId?: number;
-    readonly title: string;
-    readonly done: boolean;
+export interface Comment {
+  readonly time: number;
+  readonly user: User;
+  readonly content: string;
+}
+
+export interface CommentUpdate {
+  readonly index: number;
+  readonly comment: Comment;
 }
 
 export interface Project {
-    readonly id?: number;
-    readonly title: string;
-    readonly description: string;
+  readonly id?: number;
+  readonly title: string;
+  readonly description: string;
+  readonly comments: Comment[];
 }
 
 export interface Tab {
   readonly id?: any;
   readonly title: string;
+}
+
+export interface Task {
+    readonly id?: number;
+    readonly projectId?: number;
+    readonly title: string;
+    readonly done: boolean;
 }
 
 export interface User {
