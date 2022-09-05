@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import {Observable} from "rxjs";
+import { combineLatest, Observable } from "rxjs";
 import {Project, Tab} from "../../model";
 import {ProjectService} from "../../projects/project.service";
+import { ActivatedRoute } from "@angular/router";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'mac-project-container',
@@ -21,11 +23,17 @@ export class ProjectContainerComponent implements OnInit {
   activeTab: Tab = this.tabs[0];
 
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.selectedProject = this.projectService.getSelectedProject();
+    this.selectedProject = combineLatest([this.projectService.getProjects(), this.route.params])
+      .pipe(
+        map(([projects, routeParams]) => {
+          return projects.find(project => project.id === +routeParams.projectId)
+        })
+      );
   }
 
   activateTab(tab: Tab) {

@@ -37,9 +37,4 @@ export class AppComponent implements OnInit {
       );
   }
 
-  selectProject(id: number) {
-    this.projectService.selectProject(id);
-  }
-
-
 }

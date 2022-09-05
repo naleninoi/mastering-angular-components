@@ -27,6 +27,8 @@ import { FromNowPipe } from './pipes/from-now.pipe';
 import { CommentComponent } from './comments/comment/comment.component';
 import { CommentsListComponent } from './comments/comments-list/comments-list.component';
 import { ProjectCommentsContainerComponent } from './containers/project-comments-container/project-comments-container.component';
+import { RouterModule } from "@angular/router";
+import { routes } from "./routes";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { ProjectCommentsContainerComponent } from './containers/project-comments
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(Database, {dataEncapsulation: false, delay: 0})
+    HttpClientInMemoryWebApiModule.forRoot(Database, {dataEncapsulation: false, delay: 0}),
+    RouterModule.forRoot(routes)
   ],
   providers: [ProjectService, TaskService, UserService],
   bootstrap: [AppComponent]

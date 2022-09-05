@@ -7,12 +7,12 @@
       <mac-navigation-item *ngFor="let project of projects | async"
                             [navId]="project.id"
                             [title]="project.title"
-                            [class.active]="project.id === (selectedProject | async).id"
-                            (outActivateNavigationItem)="selectProject($event)">
+                            routerLinkActive="active"
+                            [routerLink]="['/projects', project.id]">
       </mac-navigation-item>
     </mac-navigation-section>
   </mac-navigation>
 </aside>
 <main class="main">
-  <mac-project-container></mac-project-container>
+  <router-outlet></router-outlet>
 </main>
