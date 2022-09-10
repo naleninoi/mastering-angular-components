@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@
 import { combineLatest, Observable } from "rxjs";
 import {Project, Tab} from "../../model";
 import {ProjectService} from "../../projects/project.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { map } from "rxjs/operators";
 
 @Component({
@@ -20,11 +20,12 @@ export class ProjectContainerComponent implements OnInit {
     {id: 'comments', title: 'Comments'},
     {id: 'activities', title: 'Activities'}
   ];
-  activeTab: Tab = this.tabs[0];
+  activeTab: Observable<Tab>;
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -34,10 +35,11 @@ export class ProjectContainerComponent implements OnInit {
           return projects.find(project => project.id === +routeParams.projectId)
         })
       );
-  }
-
-  activateTab(tab: Tab) {
-    this.activeTab = tab;
+    this.activeTab = combineLatest([this.selectedProject, this.route.url])
+      .pipe(
+        map(([project]) =>
+          this.tabs.find(tab => this.router.isActive(`/projects/${project.id}/${tab.id}`, false)))
+      );
   }
 
   updateProject(project: Project) {
