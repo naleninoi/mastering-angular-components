@@ -3,7 +3,7 @@ import { combineLatest, Observable } from "rxjs";
 import {Project, Tab} from "../../model";
 import {ProjectService} from "../../projects/project.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 @Component({
   selector: 'mac-project-container',
@@ -40,6 +40,12 @@ export class ProjectContainerComponent implements OnInit {
         map(([project]) =>
           this.tabs.find(tab => this.router.isActive(`/projects/${project.id}/${tab.id}`, false)))
       );
+  }
+
+  activateTab(tab: Tab) {
+    this.selectedProject.pipe(
+      take(1),
+    ).subscribe((project: Project) => this.router.navigate(['/projects', project.id, tab.id]));
   }
 
   updateProject(project: Project) {
