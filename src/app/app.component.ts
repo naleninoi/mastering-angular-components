@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   openTasksCount: Observable<number>;
   user: Observable<User>;
   projects: Observable<Project[]>;
-  selectedProject: Observable<Project>;
 
   constructor(
     private projectService: ProjectService,
@@ -25,7 +24,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.projects = this.projectService.getProjects();
-    this.selectedProject = this.projectService.getSelectedProject();
     this.user = this.userService.getCurrentUser();
     this.openTasksCount = this.taskService.getTasks()
       .pipe(

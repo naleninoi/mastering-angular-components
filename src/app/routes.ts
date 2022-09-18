@@ -4,11 +4,13 @@ import { TaskListContainerComponent } from "./containers/task-list-container/tas
 import {
   ProjectCommentsContainerComponent
 } from "./containers/project-comments-container/project-comments-container.component";
+import { ProjectContainerGuard } from "./guards/project-container.guard";
 
 export const routes: Route[] = [
   {
     path: 'projects/:projectId',
     component: ProjectContainerComponent,
+    canActivate: [ProjectContainerGuard],
     children: [
       {
         path: 'tasks',

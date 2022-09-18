@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from "rxjs";
+import { combineLatest, Observable } from "rxjs";
 import { Comment, CommentUpdate, Project, User } from "../../model";
 import { ProjectService } from "../../projects/project.service";
 import { UserService } from "../../users/user.service";
 import { map, take } from "rxjs/operators";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'mac-project-comments-container',
@@ -18,12 +19,17 @@ export class ProjectCommentsContainerComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    this.selectedProject = this.projectService.getSelectedProject();
+    this.selectedProject = combineLatest([this.projectService.getProjects(), this.route.parent.params])
+      .pipe(
+        map(([projects, routeParams]) =>
+        projects.find(project => project.id === +routeParams.projectId))
+      );
     this.projectComments = this.selectedProject.pipe(
       map(project => project.comments)
     );

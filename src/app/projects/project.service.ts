@@ -20,20 +20,11 @@ export class ProjectService {
           ([projects, selectedProjectId]) => projects.find(project => project.id === selectedProjectId)
           )
       );
-
   }
 
   private loadProjects() {
     this.http.get<Project[]>('/api/projects')
       .subscribe(data => this.projects.next(data));
-  }
-
-  selectProject(id: number) {
-    this.selectedProjectId.next(id);
-  }
-
-  getSelectedProject() {
-    return this.selectedProject;
   }
 
   getProjects() {

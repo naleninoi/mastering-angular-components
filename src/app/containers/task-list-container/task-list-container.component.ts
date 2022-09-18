@@ -4,6 +4,7 @@ import {map, switchMap, take} from 'rxjs/operators';
 import {Project, Task, TaskListFilterType} from 'src/app/model';
 import { ProjectService } from 'src/app/projects/project.service';
 import {TaskService} from 'src/app/tasks/task.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'mac-task-list-container',
@@ -20,14 +21,19 @@ export class TaskListContainerComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.selectedProject = this.projectService.getSelectedProject();
+    this.selectedProject = combineLatest([this.projectService.getProjects(), this.route.parent.params])
+      .pipe(
+        map(([projects, routeParams]) =>
+          projects.find(project => project.id === +routeParams.projectId))
+      );
     this.tasks = this.selectedProject.pipe(
-      switchMap(project => this.taskService.getProjectTasks(project.id))
+      switchMap((project) => this.taskService.getProjectTasks(project.id))
     );
     this.filterTasks();
   }

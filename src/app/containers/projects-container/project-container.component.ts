@@ -31,9 +31,8 @@ export class ProjectContainerComponent implements OnInit {
   ngOnInit(): void {
     this.selectedProject = combineLatest([this.projectService.getProjects(), this.route.params])
       .pipe(
-        map(([projects, routeParams]) => {
-          return projects.find(project => project.id === +routeParams.projectId)
-        })
+        map(([projects, routeParams]) =>
+          projects.find(project => project.id === +routeParams.projectId))
       );
     this.activeTab = combineLatest([this.selectedProject, this.route.url])
       .pipe(
