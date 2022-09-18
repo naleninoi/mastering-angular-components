@@ -5,6 +5,8 @@ import {Project, Task, TaskListFilterType} from 'src/app/model';
 import { ProjectService } from 'src/app/projects/project.service';
 import {TaskService} from 'src/app/tasks/task.service';
 import { ActivatedRoute } from "@angular/router";
+import { ActivitiesService } from "../../activities/activities.service";
+import { limitWithEllipsis } from "../../utilities/string-utilities";
 
 @Component({
   selector: 'mac-task-list-container',
@@ -22,6 +24,7 @@ export class TaskListContainerComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private projectService: ProjectService,
+    private activitiesService: ActivitiesService,
     private route: ActivatedRoute
   ) {
   }
@@ -55,11 +58,23 @@ export class TaskListContainerComponent implements OnInit {
           done: false
         };
         this.taskService.addTask(task);
+        this.activitiesService.logProjectActivity(
+          project.id,
+          'tasks',
+          'A task was added',
+          `A new task ${limitWithEllipsis(title, 30)} was added to #project-${project.id}`
+        );
       });
   }
 
   updateTask(task: Task) {
     this.taskService.updateTask(task);
+    this.activitiesService.logProjectActivity(
+      task.projectId,
+      'tasks',
+      'A task was added',
+      `A new task ${limitWithEllipsis(task.title, 30)} was added to #project-${task.projectId}`
+    );
   }
 
   filterTasks() {

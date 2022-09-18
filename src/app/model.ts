@@ -1,3 +1,22 @@
+export type ActivityAlignment = 'left' | 'right';
+
+export type Activity = ProjectActivity;
+
+export interface ActivityBase {
+  kind: string;
+  id?: number;
+  user: User;
+  time: number;
+  category: string;
+  title: string;
+  message: string;
+}
+
+export interface ActivitySliderSelection {
+  start: number;
+  end: number;
+}
+
 export interface Comment {
   readonly time: number;
   readonly user: User;
@@ -14,6 +33,11 @@ export interface Project {
   readonly title: string;
   readonly description: string;
   readonly comments: Comment[];
+}
+
+export interface ProjectActivity extends ActivityBase {
+  kind: 'project';
+  projectId: number;
 }
 
 export interface Tab {

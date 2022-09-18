@@ -1,5 +1,5 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
-import {Project, Task, User} from "./model";
+import { Activity, Project, Task, User } from "./model";
 import {Injectable} from "@angular/core";
 
 @Injectable({
@@ -7,6 +7,8 @@ import {Injectable} from "@angular/core";
 })
 export class Database implements InMemoryDbService {
   createDb(): {} {
+    const now = +new Date();
+
     const projects: Project[] = [
       {id: 1, title: 'My first project', description: 'This is your first project.', comments: []},
       {id: 2, title: 'My second project', description: 'This is your second project.', comments: []},
@@ -23,5 +25,38 @@ export class Database implements InMemoryDbService {
       {id: 1, name: 'Evok', pictureUrl: '/assets/user.png'}
     ];
 
-    return {projects, tasks, users}}
+    const activities: Activity[] = [
+      {
+        id: 1,
+        kind: 'project',
+        user: users[0],
+        time: now - 1000 * 60 * 60 * 8,
+        projectId: 1,
+        category: 'tasks',
+        title: 'A task was updated',
+        message: 'The task \'Task 1\' was updated on #project-1'
+      },
+      {
+        id: 2,
+        kind: 'project',
+        user: users[0],
+        time: now - 1000 * 60 * 60 * 5,
+        projectId: 2,
+        category: 'tasks',
+        title: 'A task was updated',
+        message: 'The task \'Task 1\' was updated on #project-2'
+      },
+      {
+        id: 3,
+        kind: 'project',
+        user: users[0],
+        time: now - 1000 * 60 * 60 * 2,
+        projectId: 2,
+        category: 'tasks',
+        title: 'A task was updated',
+        message: 'The task \'Task 2\' was updated on #project-1'
+      },
+    ];
+
+    return {projects, tasks, users, activities}}
 }
