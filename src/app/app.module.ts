@@ -29,6 +29,7 @@ import { CommentsListComponent } from './comments/comments-list/comments-list.co
 import { ProjectCommentsContainerComponent } from './containers/project-comments-container/project-comments-container.component';
 import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
+import { ActivitySliderComponent } from './activities/activity-slider/activity-slider.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { routes } from "./routes";
     FromNowPipe,
     CommentComponent,
     CommentsListComponent,
-    ProjectCommentsContainerComponent
+    ProjectCommentsContainerComponent,
+    ActivitySliderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,6 @@
+<svg width="100%" height="70px">
+  <rect x="0" y="30" width="100%" height="40" class="slide"></rect>
+  <rect *ngFor="let activity of activities"
+        [attr.x]="projectTime(activity.time) + '%'"
+        height="40" width="2px" y="30" class="activity"></rect>
+</svg>
