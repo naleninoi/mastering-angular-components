@@ -1,11 +1,10 @@
 import {
   Component,
-  OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   Input,
   Output,
-  EventEmitter, ElementRef, OnChanges, SimpleChanges
+  EventEmitter, ElementRef, OnChanges, SimpleChanges, HostListener
 } from '@angular/core';
 import { Activity, ActivitySliderSelection } from "../../model";
 
@@ -24,6 +23,9 @@ export class ActivitySliderComponent implements OnChanges {
   timeFirst: number;
   timeLast: number;
   timeSpan: number;
+  ticks: number[];
+  selection: ActivitySliderSelection;
+  modifySelection: boolean;
 
   constructor(private elementRef: ElementRef) { }
 
@@ -38,7 +40,21 @@ export class ActivitySliderComponent implements OnChanges {
         this.timeFirst = this.timeLast = new Date().getTime();
       }
       this.timeSpan = Math.max(1, this.timeLast - this.timeFirst);
+      this.computeTicks();
+      this.selection = {
+        start: this.timeFirst,
+        end: this.timeLast
+      };
+      this.outSelectionChange.next(this.selection);
     }
+  }
+
+  computeTicks() {
+    const count = 5;
+    const timeSpanTick = this.timeSpan / count;
+    this.ticks = Array.from({length: count}).map((el, index) => {
+      return this.timeFirst + timeSpanTick * index
+    });
   }
 
   totalWidth() {
@@ -52,5 +68,34 @@ export class ActivitySliderComponent implements OnChanges {
 
   projectLength(length: number) {
     return this.timeFirst + (length - this.padding) / this.totalWidth() * this.timeSpan;
+  }
+
+  @HostListener('mousedown', ['$event'])
+  onMouseDown(event) {
+    this.selection.start = this.selection.end = this.projectLength(event.offsetX);
+    this.outSelectionChange.next(this.selection);
+    this.modifySelection = true;
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event) {
+    if (this.modifySelection) {
+      this.selection.end = Math.max(this.selection.start, this.projectLength(event.offsetX));
+      this.outSelectionChange.next(this.selection);
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('mouseup')
+  onMouseUp() {
+    this.modifySelection = false;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.modifySelection = false;
   }
 }
