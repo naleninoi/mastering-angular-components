@@ -30,6 +30,7 @@ import { ProjectCommentsContainerComponent } from './containers/project-comments
 import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { ActivitySliderComponent } from './activities/activity-slider/activity-slider.component';
+import { ActivityComponent } from './activities/activity/activity.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ActivitySliderComponent } from './activities/activity-slider/activity-s
     CommentComponent,
     CommentsListComponent,
     ProjectCommentsContainerComponent,
-    ActivitySliderComponent
+    ActivitySliderComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,
