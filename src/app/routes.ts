@@ -5,6 +5,9 @@ import {
   ProjectCommentsContainerComponent
 } from "./containers/project-comments-container/project-comments-container.component";
 import { ProjectContainerGuard } from "./guards/project-container.guard";
+import {
+  ProjectActivitiesContainerComponent
+} from "./containers/project-activities-container/project-activities-container.component";
 
 export const routes: Route[] = [
   {
@@ -19,6 +22,10 @@ export const routes: Route[] = [
       {
         path: 'comments',
         component: ProjectCommentsContainerComponent
+      },
+      {
+        path: 'activities',
+        component: ProjectActivitiesContainerComponent
       },
       {
         path: '**',

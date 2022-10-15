@@ -22,7 +22,6 @@ export class ActivitiesService {
   private loadActivities() {
     this.http.get<Activity[]>('/api/activities')
       .subscribe(response => {
-        console.log(response);
         this.activities.next(response);
       });
   }
